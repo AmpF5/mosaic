@@ -1,0 +1,37 @@
+build/bin
+node_modules
+frontend/dist
+# Ignore VSCode settings and workspace files
+.vscode/
+
+# Ignore Go build artifacts and dependencies
+/bin/
+/pkg/
+
+# Go-specific ignores
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+*.log
+
+# Go modules
+/go.sum
+/go.work
+/go.work.sum
+
+# Wails build output
+/build/
+/wailsjs/
+/frontend/dist/
+/frontend/node_modules/
+
+# Node.js dependencies (if using Wails with a frontend framework)
+node_modules/
+package-lock.json
+yarn.lock
+
+
