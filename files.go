@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"mosaic/database"
 	"os"
 	"regexp"
 	"slices"
@@ -12,25 +13,19 @@ import (
 
 var mimeTypes = []string{"jpg", "png", "jpeg", "heic"}
 
-type file struct {
-	filePath string
-	mimeType string
-	size     int
-}
+// func createFile(filePath, mimeType string, size int) *File {
+// 	f := File{
+// 		FilePath: filePath,
+// 		MimeType: mimeType,
+// 		Size:     size,
+// 	}
 
-func createFile(filePath, mimeType string, size int) *file {
-	f := file{
-		filePath: filePath,
-		mimeType: mimeType,
-		size:     size,
-	}
+// 	return &f
+// }
 
-	return &f
-}
-
-func (f file) String() string {
-	return fmt.Sprintf("{ file_path: %s, mime_type: .%s, size: %d }", f.filePath, f.mimeType, f.size)
-}
+// func (f File) String() string {
+// 	return fmt.Sprintf("{ file_path: %s, mime_type: .%s, size: %d }", f.filePath, f.mimeType, f.size)
+// }
 
 func readDir(path string) {
 	files, err := os.ReadDir(path)
@@ -39,7 +34,7 @@ func readDir(path string) {
 		log.Fatal(err)
 	}
 
-	images := []file{}
+	images := []database.File{}
 
 	for _, file := range files {
 		fileInfo, err := file.Info()
@@ -57,7 +52,7 @@ func readDir(path string) {
 			continue
 		}
 
-		image := createFile(fileInfo.Name(), mimeType, int(fileInfo.Size()))
+		// image := createFile(fileInfo.Name(), mimeType, int(fileInfo.Size()))
 		images = append(images, *image)
 	}
 
