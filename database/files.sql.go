@@ -10,13 +10,19 @@ import (
 )
 
 const createFile = `-- name: CreateFile :one
-INSERT INTO files(id, file_path, mime_type, size, modified_at)
-VALUES(value1, value2, value3, value4, value5)
+INSERT INTO files(file_path, mime_type, size)
+VALUES(?, ?, ?)
 RETURNING id, file_path, mime_type, size, modified_at
 `
 
-func (q *Queries) CreateFile(ctx context.Context) (File, error) {
-	row := q.db.QueryRowContext(ctx, createFile)
+type CreateFileParams struct {
+	FilePath string
+	MimeType string
+	Size     int64
+}
+
+func (q *Queries) CreateFile(ctx context.Context, arg CreateFileParams) (File, error) {
+	row := q.db.QueryRowContext(ctx, createFile, arg.FilePath, arg.MimeType, arg.Size)
 	var i File
 	err := row.Scan(
 		&i.ID,

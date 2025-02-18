@@ -5,14 +5,13 @@
 package database
 
 import (
-	"database/sql"
 	"time"
 )
 
 type File struct {
-	ID         interface{}
+	ID         int64
 	FilePath   string
 	MimeType   string
-	Size       sql.NullInt64
+	Size       int64
 	ModifiedAt time.Time
 }
