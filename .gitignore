@@ -35,3 +35,6 @@ package-lock.json
 yarn.lock
 
 frontend/package.json.md5
+
+# db
+sql/db.sqlite

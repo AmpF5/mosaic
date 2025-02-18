@@ -1,11 +1,11 @@
 -- +goose Up
 CREATE TABLE files (
-    id UUID PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     file_path TEXT NOT NULL,
     mime_type TEXT NOT NULL,
-    size Integer,
-    modified_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    size INTEGER NOT NULL,
+    modified_at TIMESTAMP NOT NULL DEFAULT current_timestamp
 );
 
 -- +goose Down
-DROP TABLE images;
+DROP TABLE files;

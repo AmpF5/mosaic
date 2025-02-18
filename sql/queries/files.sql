@@ -1,6 +1,6 @@
 -- name: CreateFile :one
-INSERT INTO files(id, file_path, mime_type, size, modified_at)
-VALUES(value1, value2, value3, value4, value5)
+INSERT INTO files(file_path, mime_type, size)
+VALUES(?, ?, ?)
 RETURNING *;
 
 -- name: GetFiles :many
