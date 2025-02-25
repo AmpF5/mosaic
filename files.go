@@ -5,6 +5,7 @@ import (
 	"log"
 	"mosaic/database"
 	"os"
+	"path/filepath"
 	"regexp"
 	"slices"
 
@@ -39,7 +40,7 @@ func readDir(path string, app *App) {
 		}
 
 		file, err := app.db.CreateFile(app.ctx, database.CreateFileParams{
-			FilePath: fileInfo.Name(),
+			FilePath: filepath.Join(path, fileInfo.Name()),
 			MimeType: mimeType,
 			Size:     int64(fileInfo.Size()),
 		})
@@ -72,5 +73,14 @@ func OpenFileExplorer(app *App) {
 
 	readDir(dir, app)
 
-	fmt.Println("Selected directory:", dir)
+}
+
+func GetAllFiles(app *App) []database.File {
+	files, err := app.db.GetFiles(app.ctx)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return files
 }

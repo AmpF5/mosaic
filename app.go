@@ -44,3 +44,7 @@ func (a *App) startup(ctx context.Context) {
 func (a *App) OpenFileExplorer() {
 	OpenFileExplorer(a)
 }
+
+func (a *App) GetAllFiles() []database.File {
+	return GetAllFiles(a)
+}
